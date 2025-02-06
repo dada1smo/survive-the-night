@@ -9,12 +9,21 @@ const cards: GameCardType[] = [
   { id: uuidv4(), title: 'Escopeta' },
 ];
 
-const places: CardPlaceType[] = ['A', 'B', 'C'].map((col, row) => {
-  return {
-    id: `${col}${row + 1}`,
-    col,
-    row,
-  };
+const places: CardPlaceType[] = ['A', 'B', 'C'].flatMap((col) => {
+  const row = 1;
+
+  return [
+    {
+      id: `${col}${row}`,
+      col,
+      row: row,
+    },
+    {
+      id: `${col}${row + 1}`,
+      col,
+      row: row + 1,
+    },
+  ];
 });
 
 export default function GamePage() {
