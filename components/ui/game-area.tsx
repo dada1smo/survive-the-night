@@ -15,11 +15,11 @@ const GameArea: FunctionComponent = () => {
 
   return (
     <DndContext id={id} onDragEnd={handleDragEnd}>
-      <div className="flex">
-        <div className="w-3/5 flex-1">
+      <div className="flex h-full">
+        <div className="w-3/5 flex-1 flex flex-col justify-end items-center">
           <PlayArea places={currentPlacements} />
         </div>
-        <div className="w-2/5 flex-initial">
+        <div className="w-2/5 flex-initial flex flex-col justify-end items-end">
           <PlayerHand hand={currentHand} />
         </div>
       </div>
