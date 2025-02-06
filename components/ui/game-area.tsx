@@ -1,43 +1,17 @@
 'use client';
 
-import { FunctionComponent, useId, useState } from 'react';
+import { FunctionComponent, useId } from 'react';
 import { DndContext, DragEndEvent } from '@dnd-kit/core';
 import PlayerHand from './player-hand';
 import PlayArea from './play-area';
-import { CardPlaceType } from '@/types/CardPlaceType';
-import { GameCardType } from '@/types/GameCardType';
+import useGameStore from '@/stores/game.store';
 
-interface GameAreaProps {
-  playerHand: GameCardType[];
-  cardPlaces: CardPlaceType[];
-}
-
-const GameArea: FunctionComponent<GameAreaProps> = ({
-  playerHand,
-  cardPlaces,
-}) => {
+const GameArea: FunctionComponent = () => {
   const id = useId();
 
-  const [currentHand, setCurrentHand] = useState<GameCardType[]>(playerHand);
-  const [currentPlacements, setCurrentPlacements] =
-    useState<CardPlaceType[]>(cardPlaces);
-
-  function handlePlayCard(cardId: string, placeId: string) {
-    const findCard = currentHand.find((card) => card.id === cardId);
-    setCurrentHand((prev) => prev.filter((card) => card.id !== cardId));
-    setCurrentPlacements((prev) =>
-      prev.map((place) => {
-        if (place.id !== placeId) {
-          return place;
-        }
-
-        return {
-          ...place,
-          placedCard: findCard,
-        };
-      })
-    );
-  }
+  const currentPlacements = useGameStore(({ game }) => game.player.placements);
+  const currentHand = useGameStore(({ game }) => game.player.hand);
+  const playCard = useGameStore((state) => state.playCard);
 
   return (
     <DndContext id={id} onDragEnd={handleDragEnd}>
@@ -54,7 +28,7 @@ const GameArea: FunctionComponent<GameAreaProps> = ({
 
   function handleDragEnd(event: DragEndEvent) {
     if (event.over) {
-      handlePlayCard(event.active.id as string, event.over.id as string);
+      playCard(event.active.id as string, event.over.id as string);
     }
   }
 };

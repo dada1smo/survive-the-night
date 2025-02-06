@@ -36,7 +36,6 @@ export interface GameCardProps
   extends React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof cardVariants> {
   title: string;
-  id: string;
   //   description: string;
   //   flavour: string;
   //   hitPoints: number;
