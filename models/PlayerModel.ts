@@ -1,6 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
 import { GameCardModel } from './GameCardModel';
 import { CardPlaceModel } from './CardPlaceModel';
+import { GameCardType } from '@/types/GameCardType';
 
 export class PlayerModel {
   public id: string = uuidv4();
@@ -24,15 +25,17 @@ export class PlayerModel {
           },
         ];
       })
-      .map(({ col, row }) => new CardPlaceModel(col, row));
+      .map(({ col, row }) => new CardPlaceModel(col, row, 'player'));
   }
 
   public findCardInHand(cardId: string) {
     return this.hand.find((card) => card.id === cardId);
   }
 
-  public addCardToHand(card: GameCardModel) {
-    this.hand = [...this.hand, card];
+  public addCardToHand(cardName: GameCardType['name']) {
+    const newCard = new GameCardModel(cardName);
+    this.hand = [...this.hand, newCard];
+
     return this.hand;
   }
 

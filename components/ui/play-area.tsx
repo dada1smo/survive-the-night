@@ -1,13 +1,13 @@
-import { CardPlaceType } from '@/types/CardPlaceType';
 import { FunctionComponent } from 'react';
 import CardPlayArea from './card-play-area';
+import { CardPlaceModel } from '@/models/CardPlaceModel';
 
 interface PlayAreaProps {
-  places: CardPlaceType[];
+  places: CardPlaceModel[];
 }
 
 const PlayArea: FunctionComponent<PlayAreaProps> = ({ places }) => {
-  const rows = places.reduce((acc: CardPlaceType[][], item) => {
+  const rows = places.reduce((acc: CardPlaceModel[][], item) => {
     acc[item.row] = acc[item.row] || [];
     acc[item.row].push(item);
     return acc;

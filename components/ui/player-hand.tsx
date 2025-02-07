@@ -1,9 +1,9 @@
 import { FunctionComponent } from 'react';
 import HandCard from './hand-card';
-import { GameCardType } from '@/types/GameCardType';
+import { GameCardModel } from '@/models/GameCardModel';
 
 interface PlayerHandProps {
-  hand: GameCardType[];
+  hand: GameCardModel[];
 }
 
 const PlayerHand: FunctionComponent<PlayerHandProps> = ({ hand }) => {

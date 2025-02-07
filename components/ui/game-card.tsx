@@ -3,7 +3,7 @@ import { cva, VariantProps } from 'class-variance-authority';
 import { forwardRef } from 'react';
 
 const cardVariants = cva(
-  'flex items-center justify-center gap-2 whitespace-nowrap rounded-md transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0',
+  'transition flex flex-col items-center justify-between items-stretch gap-2 whitespace-nowrap rounded-md transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0',
   {
     variants: {
       variant: {
@@ -11,18 +11,10 @@ const cardVariants = cva(
           'bg-primary text-primary-foreground shadow hover:bg-primary/90',
         destructive:
           'bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90',
-        outline:
-          'border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground',
-        secondary:
-          'bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80',
-        ghost: 'hover:bg-accent hover:text-accent-foreground',
-        link: 'text-primary underline-offset-4 hover:underline',
       },
       size: {
-        default: 'h-9 px-4 py-2 w-[112px] h-[160px]',
-        sm: 'h-8 rounded-md px-3 text-xs',
-        lg: 'h-12 rounded-md px-8 text-xl',
-        icon: 'h-9 w-9',
+        default: 'h-9 px-2 py-2 w-[112px] h-[160px]',
+        played: 'h-9 px-2 py-2 w-[100px] h-[144px]',
       },
     },
     defaultVariants: {
@@ -35,22 +27,31 @@ const cardVariants = cva(
 export interface GameCardProps
   extends React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof cardVariants> {
-  title: string;
-  //   description: string;
-  //   flavour: string;
-  //   hitPoints: number;
-  //   attackDamage: number;
+  title?: string;
+  health?: number;
+  damage?: number;
+  flavourText?: string;
 }
 
 const GameCard = forwardRef<HTMLDivElement, GameCardProps>(
-  ({ variant, size, className, title, ...props }, ref) => {
+  (
+    { variant, size, className, title, health, damage, flavourText, ...props },
+    ref
+  ) => {
     return (
       <div
         className={cn(cardVariants({ variant, size, className }))}
         ref={ref}
         {...props}
       >
-        {title}
+        <div className="flex justify-between">
+          {health && <span className="text-sm">♠ {damage}</span>}
+          {damage && <span className="text-sm">♥ {health}</span>}
+        </div>
+        <p className="text-center">{title}</p>
+        <p className="text-center text-xs whitespace-normal italic">
+          {flavourText}
+        </p>
       </div>
     );
   }

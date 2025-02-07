@@ -1,11 +1,11 @@
 import { FunctionComponent } from 'react';
 import CardPlace from './card-place';
 import { useDroppable } from '@dnd-kit/core';
-import { CardPlaceType } from '@/types/CardPlaceType';
 import HandCard from './hand-card';
+import { CardPlaceModel } from '@/models/CardPlaceModel';
 
 interface CardPlayAreaProps {
-  place: CardPlaceType;
+  place: CardPlaceModel;
 }
 
 const CardPlayArea: FunctionComponent<CardPlayAreaProps> = ({ place }) => {
@@ -15,7 +15,9 @@ const CardPlayArea: FunctionComponent<CardPlayAreaProps> = ({ place }) => {
 
   return (
     <CardPlace ref={setNodeRef} variant={isOver ? 'hovered' : 'default'}>
-      {place.placedCard && <HandCard card={place.placedCard} />}
+      {place.placedCard && (
+        <HandCard card={place.placedCard} cardProps={{ size: 'played' }} />
+      )}
     </CardPlace>
   );
 };

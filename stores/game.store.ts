@@ -1,21 +1,16 @@
-import { GameCardModel } from '@/models/GameCardModel';
 import { GameModel } from '@/models/GameModel';
 import { PlayerModel } from '@/models/PlayerModel';
+import { CardNames } from '@/types/GameCardType';
 import { create } from 'zustand';
 
 function initGame() {
-  const cards = [
-    { title: 'Pistoleiro' },
-    { title: 'Espadachim' },
-    { title: 'Escopeta' },
-  ];
+  const cards: CardNames[] = ['gunslinger', 'swordsperson', 'brute'];
 
   const player = new PlayerModel();
   const game = new GameModel(player);
 
-  cards.forEach((card) => {
-    const newCard = new GameCardModel(card.title);
-    game.player.addCardToHand(newCard);
+  cards.forEach((name) => {
+    game.player.addCardToHand(name);
   });
 
   return game;

@@ -13,7 +13,7 @@ const placeVariants = cva(
           'bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90',
       },
       size: {
-        default: 'h-9 w-[112px] h-[160px]',
+        default: 'w-[100px] h-[144px]',
         sm: 'h-8 rounded-md px-3 text-xs',
         lg: 'h-12 rounded-md px-8 text-xl',
         icon: 'h-9 w-9',
