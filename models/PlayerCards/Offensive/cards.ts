@@ -1,4 +1,4 @@
-import { GameCardType } from '@/types/GameCardType';
+import { CardType } from '@/types/CardType';
 
 export enum OffensivePlayerCardNames {
   gunslinger = 'gunslinger',
@@ -8,7 +8,7 @@ export enum OffensivePlayerCardNames {
 
 export type OffensivePlayerCardName = `${OffensivePlayerCardNames}`;
 
-export interface OffensivePlayerCardStats extends GameCardType {
+export interface OffensivePlayerCardStats extends CardType {
   name: OffensivePlayerCardName;
   health: number;
   damage: number;
@@ -23,6 +23,8 @@ export const offensivePlayerCards: OffensivePlayerCardStats[] = [
     flavourText: 'Portador de armas de fogo.',
     classification: 'offensive',
     affiliation: 'player',
+    rarity: 1,
+    level: 1,
   },
   {
     name: 'swordsperson',
@@ -32,6 +34,8 @@ export const offensivePlayerCards: OffensivePlayerCardStats[] = [
     flavourText: 'Se garante com um facão.',
     classification: 'offensive',
     affiliation: 'player',
+    rarity: 1,
+    level: 1,
   },
   {
     name: 'brute',
@@ -41,5 +45,7 @@ export const offensivePlayerCards: OffensivePlayerCardStats[] = [
     flavourText: 'Não costuma malhar perna.',
     classification: 'offensive',
     affiliation: 'player',
+    rarity: 1,
+    level: 1,
   },
 ];

@@ -1,4 +1,5 @@
-import { GameCardAffiliation } from './../types/GameCardType';
+import { buildPlaceId } from '@/lib/place';
+import { GameCardAffiliation } from '../types/CardType';
 import { GameCardModel } from './GameCardModel';
 export class CardPlaceModel {
   public id: string;
@@ -9,7 +10,7 @@ export class CardPlaceModel {
   constructor(col: string, row: number, affiliation: GameCardAffiliation) {
     this.col = col;
     this.row = row;
-    this.id = `${col}${row}-${affiliation}`;
+    this.id = buildPlaceId(col, row, affiliation);
   }
 
   public addCardToPlace(card?: GameCardModel) {

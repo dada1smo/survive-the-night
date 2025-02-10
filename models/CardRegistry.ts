@@ -1,11 +1,11 @@
-import { GameCardType } from '@/types/GameCardType';
+import { CardType } from '@/types/CardType';
 import {
   offensivePlayerCards,
   OffensivePlayerCardStats,
 } from './PlayerCards/Offensive/cards';
 import { offensiveEnemyCards } from './EnemyCards/Offensive/cards';
 
-export const CardRegistry: Array<GameCardType | OffensivePlayerCardStats> = [
+export const CardRegistry: Array<CardType | OffensivePlayerCardStats> = [
   ...offensivePlayerCards,
   ...offensiveEnemyCards,
 ];

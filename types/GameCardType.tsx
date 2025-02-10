@@ -1,15 +1,24 @@
-import { OffensiveEnemyCardName } from '@/models/EnemyCards/Offensive/cards';
-import { OffensivePlayerCardName } from '@/models/PlayerCards/Offensive/cards';
+import { OffensivePlayerCardStats } from '@/models/PlayerCards/Offensive/cards';
+import { CardType } from './CardType';
+import { OffensiveEnemyCardStats } from '@/models/EnemyCards/Offensive/cards';
 
-export type GameCardClassification = 'offensive' | 'support';
-export type GameCardAffiliation = 'player' | 'enemy';
+export interface GameCardPlacementType {
+  isPlaced: boolean;
+  col: string;
+  row: number;
+}
 
-export type CardNames = OffensivePlayerCardName | OffensiveEnemyCardName;
+export interface GameCardCurrentStatsType {
+  damage: number;
+  health: number;
+}
 
-export interface GameCardType {
-  name: CardNames;
-  title: string;
-  flavourText: string;
-  classification: GameCardClassification;
-  affiliation: GameCardAffiliation;
+export interface GameCardType extends CardType {
+  id: string;
+  card: OffensivePlayerCardStats | OffensiveEnemyCardStats;
+  currentStats: GameCardCurrentStatsType;
+}
+
+export interface PlacedGameCardType extends GameCardType {
+  placement: GameCardPlacementType;
 }
