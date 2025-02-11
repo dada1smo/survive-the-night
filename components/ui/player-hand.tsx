@@ -1,16 +1,16 @@
 import { FunctionComponent } from 'react';
 import HandCard from './hand-card';
-import { GameCardModel } from '@/models/GameCardModel';
+import { GameCardType } from '@/types/GameCardType';
 
 interface PlayerHandProps {
-  hand: GameCardModel[];
+  hand: GameCardType[];
 }
 
 const PlayerHand: FunctionComponent<PlayerHandProps> = ({ hand }) => {
   return (
     <div className="flex gap-2">
       {hand.map((card, index) => (
-        <HandCard key={index} card={card} />
+        <HandCard key={index} gameCard={card} />
       ))}
     </div>
   );

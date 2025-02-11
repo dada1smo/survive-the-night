@@ -6,13 +6,7 @@ export enum OffensiveEnemyCardNames {
 
 export type OffensiveEnemyCardName = `${OffensiveEnemyCardNames}`;
 
-export interface OffensiveEnemyCardStats extends CardType {
-  name: OffensiveEnemyCardName;
-  health: number;
-  damage: number;
-}
-
-export const offensiveEnemyCards: OffensiveEnemyCardStats[] = [
+export const offensiveEnemyCards: CardType[] = [
   {
     name: 'defaultZombie',
     title: 'Zumbi Padrão',

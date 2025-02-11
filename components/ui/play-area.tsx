@@ -1,8 +1,9 @@
 import { FunctionComponent } from 'react';
 import CardPlayArea from './card-play-area';
-import { CardPlaceModel } from '@/models/CardPlaceModel';
 import { CardAffiliation } from '@/types/CardType';
 import useGameStore from '@/stores/game.store';
+import { CardPlaceType } from '@/types/CardPlaceType';
+import { isInPlacement } from '@/stores/methods/card';
 
 interface PlayAreaProps {
   affiliation: CardAffiliation;
@@ -14,7 +15,7 @@ const PlayArea: FunctionComponent<PlayAreaProps> = ({ affiliation }) => {
     (state) => state.game[affiliation].placedCards
   );
 
-  const rows: { row: number; places: CardPlaceModel[] }[] = [1, 2]
+  const rows: { row: number; places: CardPlaceType[] }[] = [1, 2]
     .map((row) => {
       return {
         row,
@@ -41,8 +42,7 @@ const PlayArea: FunctionComponent<PlayAreaProps> = ({ affiliation }) => {
                   place={place}
                   affiliation={affiliation}
                   placedCard={placedCards.find((card) => {
-                    console.log(card);
-                    return card.isInPlacement(place.col, place.row);
+                    return isInPlacement(card, place.id);
                   })}
                 />
               );

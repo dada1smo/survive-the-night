@@ -9,11 +9,14 @@ const GameInfo: FunctionComponent = () => {
 
   const endTurn = useGameStore((state) => state.endTurn);
 
+  const clearGame = useGameStore((state) => state.clearGame);
+
   return (
     <div className="flex flex-col gap-2">
       <div>Noites passadas: {nightsSurvived}</div>
       <div>Turno: {currentTurn}</div>
       <Button onClick={endTurn}>Encerrar turno</Button>
+      <Button onClick={clearGame}>Limpar jogo</Button>
     </div>
   );
 };

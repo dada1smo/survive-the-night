@@ -1,6 +1,6 @@
 import { BasePlayerType } from './PlayerType';
 
-export interface Game {
+export interface GameType {
   nightsSurvived: number;
   currentTurn: number;
   enemy: BasePlayerType;

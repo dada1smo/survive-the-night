@@ -1,33 +1,33 @@
-import { EnemyModel } from '@/models/EnemyModel';
-import { GameModel } from '@/models/GameModel';
-import { PlayerModel } from '@/models/PlayerModel';
-import { CardNames } from '@/types/CardType';
+import { GameType } from '@/types/GameType';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
+import { initGame } from './methods/game';
+import { addCardToPlacement } from './methods/player';
 
-function initGame() {
-  const playerCards: CardNames[] = ['gunslinger', 'swordsperson', 'brute'];
-  const enemyCards: CardNames[] = ['defaultZombie'];
+// function initGame() {
+//   const playerCards: CardNames[] = ['gunslinger', 'swordsperson', 'brute'];
+//   const enemyCards: CardNames[] = ['defaultZombie'];
 
-  const player = new PlayerModel();
-  const enemy = new EnemyModel();
-  const game = new GameModel(player, enemy);
+//   const player = new PlayerModel();
+//   const enemy = new EnemyModel();
+//   const game = new GameModel(player, enemy);
 
-  playerCards.forEach((name) => {
-    game.player.addCardToHand(name);
-  });
+//   playerCards.forEach((name) => {
+//     game.player.addCardToHand(name);
+//   });
 
-  enemyCards.forEach((name) => {
-    game.enemy.addCardToHand(name);
-  });
+//   enemyCards.forEach((name) => {
+//     game.enemy.addCardToHand(name);
+//   });
 
-  return game;
-}
+//   return game;
+// }
 
 interface GameState {
-  game: GameModel;
+  game: GameType;
   playCard: (cardId: string, placeId: string) => void;
   endTurn: () => void;
+  clearGame: () => void;
 }
 
 const useGameStore = create<GameState>()(
@@ -36,13 +36,17 @@ const useGameStore = create<GameState>()(
       game: initGame(),
       playCard: (cardId: string, placeId: string) =>
         set(() => {
-          get().game.player.addCardToPlacement(cardId, placeId);
-          return { game: get().game };
+          const update = addCardToPlacement(get().game, cardId, placeId);
+          return { game: update };
         }),
       endTurn: () =>
         set(() => {
-          get().game.endTurn();
+          // get().game.endTurn();
           return { game: get().game };
+        }),
+      clearGame: () =>
+        set(() => {
+          return { game: initGame() };
         }),
     }),
     {

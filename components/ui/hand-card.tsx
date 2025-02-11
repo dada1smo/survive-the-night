@@ -1,16 +1,19 @@
 import { FunctionComponent } from 'react';
 import GameCard, { GameCardProps } from './game-card';
 import { useDraggable } from '@dnd-kit/core';
-import { GameCardModel } from '@/models/GameCardModel';
+import { GameCardType } from '@/types/GameCardType';
 
 interface HandCardProps {
-  card: GameCardModel;
+  gameCard: GameCardType;
   cardProps?: GameCardProps;
 }
 
-const HandCard: FunctionComponent<HandCardProps> = ({ card, cardProps }) => {
+const HandCard: FunctionComponent<HandCardProps> = ({
+  gameCard,
+  cardProps,
+}) => {
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
-    id: card.id,
+    id: gameCard.id,
   });
   const style = transform
     ? {
@@ -21,10 +24,10 @@ const HandCard: FunctionComponent<HandCardProps> = ({ card, cardProps }) => {
   return (
     <GameCard
       {...cardProps}
-      title={card.title}
-      health={card.health}
-      damage={card.damage}
-      flavourText={card.flavourText}
+      title={gameCard.card.title}
+      health={gameCard.card.health}
+      damage={gameCard.card.damage}
+      flavourText={gameCard.card.flavourText}
       ref={setNodeRef}
       style={style}
       {...listeners}

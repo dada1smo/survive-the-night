@@ -14,4 +14,6 @@ export interface CardType {
   affiliation: CardAffiliation;
   rarity: number;
   level: number;
+  health: number;
+  damage: number;
 }

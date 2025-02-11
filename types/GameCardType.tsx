@@ -1,9 +1,8 @@
-import { OffensivePlayerCardStats } from '@/models/PlayerCards/Offensive/cards';
 import { CardType } from './CardType';
-import { OffensiveEnemyCardStats } from '@/models/EnemyCards/Offensive/cards';
 
 export interface GameCardPlacementType {
   isPlaced: boolean;
+  id: string;
   col: string;
   row: number;
 }
@@ -13,9 +12,9 @@ export interface GameCardCurrentStatsType {
   health: number;
 }
 
-export interface GameCardType extends CardType {
+export interface GameCardType {
   id: string;
-  card: OffensivePlayerCardStats | OffensiveEnemyCardStats;
+  card: CardType;
   currentStats: GameCardCurrentStatsType;
 }
 

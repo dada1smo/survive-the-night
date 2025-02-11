@@ -1,3 +1,4 @@
+import { GameType } from '@/types/GameType';
 import { EnemyModel } from './EnemyModel';
 import { PlayerModel } from './PlayerModel';
 
@@ -13,6 +14,8 @@ export class GameModel {
     this.player = player;
     this.enemy = enemy;
   }
+
+  public fromJSON(json: GameType) {}
 
   public endTurn() {
     const playerPlacedCards = this.player.findPlacedCards();

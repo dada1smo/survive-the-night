@@ -8,13 +8,7 @@ export enum OffensivePlayerCardNames {
 
 export type OffensivePlayerCardName = `${OffensivePlayerCardNames}`;
 
-export interface OffensivePlayerCardStats extends CardType {
-  name: OffensivePlayerCardName;
-  health: number;
-  damage: number;
-}
-
-export const offensivePlayerCards: OffensivePlayerCardStats[] = [
+export const offensivePlayerCards: CardType[] = [
   {
     name: 'gunslinger',
     title: 'Pistoleiro',
