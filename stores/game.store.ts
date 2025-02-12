@@ -1,27 +1,8 @@
 import { GameType } from '@/types/GameType';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { initGame } from './methods/game';
-import { addCardToPlacement } from './methods/player';
-
-// function initGame() {
-//   const playerCards: CardNames[] = ['gunslinger', 'swordsperson', 'brute'];
-//   const enemyCards: CardNames[] = ['defaultZombie'];
-
-//   const player = new PlayerModel();
-//   const enemy = new EnemyModel();
-//   const game = new GameModel(player, enemy);
-
-//   playerCards.forEach((name) => {
-//     game.player.addCardToHand(name);
-//   });
-
-//   enemyCards.forEach((name) => {
-//     game.enemy.addCardToHand(name);
-//   });
-
-//   return game;
-// }
+import { endTurn, initGame } from './methods/game';
+import { addCardToPlacement } from './methods/placement';
 
 interface GameState {
   game: GameType;
@@ -36,13 +17,13 @@ const useGameStore = create<GameState>()(
       game: initGame(),
       playCard: (cardId: string, placeId: string) =>
         set(() => {
-          const update = addCardToPlacement(get().game, cardId, placeId);
-          return { game: update };
+          return {
+            game: addCardToPlacement(get().game, 'player', cardId, placeId),
+          };
         }),
       endTurn: () =>
         set(() => {
-          // get().game.endTurn();
-          return { game: get().game };
+          return { game: endTurn(get().game) };
         }),
       clearGame: () =>
         set(() => {

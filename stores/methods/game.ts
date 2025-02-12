@@ -1,8 +1,6 @@
-import { CardAffiliation, CardType } from '@/types/CardType';
 import { GameType } from '@/types/GameType';
 import { DefaultPlayer, initPlayer } from './player';
-import { DefaultEnemy, initEnemy } from './enemy';
-import { buildFromRegistry } from './card';
+import { DefaultEnemy, initEnemy, playEnemyTurn } from './enemy';
 import { produce } from 'immer';
 
 export const DefaultGame: GameType = {
@@ -23,14 +21,10 @@ export function initGame(data?: GameType): GameType {
   return game;
 }
 
-export function addCardToHand(
-  game: GameType,
-  affiliation: CardAffiliation,
-  cardName: CardType['name']
-) {
-  const buildCard = buildFromRegistry(cardName);
+export function endTurn(game: GameType) {
+  const update = playEnemyTurn(game);
 
-  return produce(game, (draft) => {
-    draft[affiliation].hand.push(buildCard);
+  return produce(update, (draft) => {
+    draft.currentTurn = draft.currentTurn + 1;
   });
 }

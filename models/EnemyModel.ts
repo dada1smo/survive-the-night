@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
 import { BasePlayerModel } from './BasePlayerModel';
 import { GameCardModel } from './GameCardModel';
-import { buildPlaceId } from '@/lib/place';
+import { buildPlaceId } from '@/stores/methods/placement';
 
 export class EnemyModel extends BasePlayerModel {
   public id: string = uuidv4();

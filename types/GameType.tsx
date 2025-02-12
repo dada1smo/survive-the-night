@@ -1,8 +1,9 @@
+import { CardAffiliation } from './CardType';
 import { BasePlayerType } from './PlayerType';
 
-export interface GameType {
+export type GameAffiliationType = Record<CardAffiliation, BasePlayerType>;
+
+export interface GameType extends GameAffiliationType {
   nightsSurvived: number;
   currentTurn: number;
-  enemy: BasePlayerType;
-  player: BasePlayerType;
 }
